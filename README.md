@@ -63,13 +63,13 @@ You can search by below params:
 7) maxrows
 ### Graydon Company Service
 This Service is useful to get information related to company in different way. 
-####Get
+#### Get
 This function will accept 3 parameters. 
 1) $company_id (ID for which you want to get information)
 2) $other_uri (Optional, default this can be blank and return company information)
 3) $data (optional, array, It can be extra parameter for which you want to perform search)
 
-#####Options for $other_uri can be:
+##### Options for $other_uri can be:
 1) company-profile
 2) branches
 3) credit-scores
@@ -85,11 +85,11 @@ This function will accept 3 parameters.
 13) events
 ### Graydon Monitoring Service
 This service is useful to retrieve and set monitoring on specific company. 
-####Get
+#### Get
 This function will accept 2 parameters as argument.
 1) $company_id
 2) $data 
-####Set
+#### Set
 This function will accept 2 parameters as argument.
 1) $company_id
 2) $data  
