@@ -51,7 +51,7 @@ This package basically contains 3 services which are,
 3) Graydon Monitoring Service - Get/Set/Delete monitoring events related to specific company.
 
 ### Graydon Search Service
-####Search 
+#### Search 
 This Method accepts 1 optional parameter in which you can pass different key and value pair as array to retrieve data accordingly. If nothing pass to the function it will return all companies.
 You can search by below params:
 1) graydonCompanyId
