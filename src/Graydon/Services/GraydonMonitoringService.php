@@ -67,15 +67,20 @@ Class GraydonMonitoringService
             foreach ($response->events as $key => $value) {
                 if (!empty($value->events)) {
                     foreach ($value->events as $k => $v) {
-                        DB::table('graydon_events')->insert([
-                            'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
-                            'registrationId' => $value->companyIdentification->registrationId,
-                            'eventId' => $v->eventId,
-                            'eventDate' => $v->eventDate,
-                            'eventCode' => $v->eventCode,
-                            'oldValue' => (!empty($v->change->from)) ? $v->change->from : '-',
-                            'newValue' => (!empty($v->change->to)) ? $v->change->to : '-',
-                        ]);
+
+                        $data = DB::table('graydon_events')->where('eventId', $v->eventId)->first();
+                        if (empty($data)) {
+
+                            DB::table('graydon_events')->insert([
+                                'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
+                                'registrationId' => $value->companyIdentification->registrationId,
+                                'eventId' => $v->eventId,
+                                'eventDate' => $v->eventDate,
+                                'eventCode' => $v->eventCode,
+                                'oldValue' => (!empty($v->change->from)) ? $v->change->from : '-',
+                                'newValue' => (!empty($v->change->to)) ? $v->change->to : '-',
+                            ]);
+                        }
                     }
                 }
             }
