@@ -68,6 +68,7 @@ Class GraydonCompanyService
                 break;
 
             case "groupStructure":
+            case "group-structure":
             case "affiliations/groupStructure":
                 $other_uri = 'affiliations/groupStructure';
                 break;
