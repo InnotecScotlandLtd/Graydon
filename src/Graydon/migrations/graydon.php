@@ -20,8 +20,8 @@ class CreateGraydonEventsTable extends Migration
             $table->integer('eventId')->nullable();
             $table->date('eventDate')->nullable();
             $table->string('eventCode')->nullable();
-            $table->string('old_value')->nullable();
-            $table->string('new_value')->nullable();
+            $table->string('oldValue')->nullable();
+            $table->string('newValue')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

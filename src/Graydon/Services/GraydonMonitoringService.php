@@ -2,6 +2,8 @@
 
 namespace InnotecScotlandLtd\Graydon\Services;
 
+use Illuminate\Support\Facades\DB;
+
 Class GraydonMonitoringService
 {
     protected $config = [];
@@ -59,7 +61,26 @@ Class GraydonMonitoringService
             'mockRequest: ' . ($this->config['IS_MOCK']) ? 'true' : 'false',
         ];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
-        return $response = $this->curlService->executeCurl($curl);
+        $response = $this->curlService->executeCurl($curl);
+        $response = json_decode($response);
+        if (!empty($response->events)) {
+            foreach ($response->events as $key => $value) {
+                if (!empty($value->events)) {
+                    foreach ($value->events as $k => $v) {
+                        DB::table('graydon_events')->insert([
+                            'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
+                            'registrationId' => $value->companyIdentification->registrationId,
+                            'eventId' => $v->eventId,
+                            'eventDate' => $v->eventDate,
+                            'eventCode' => $v->eventCode,
+                            'oldValue' => (!empty($v->change->from)) ? $v->change->from : '-',
+                            'newValue' => (!empty($v->change->to)) ? $v->change->to : '-',
+                        ]);
+                    }
+                }
+            }
+        }
+        return true;
 
     }
 
