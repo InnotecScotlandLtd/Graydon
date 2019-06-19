@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "InnotecScotlandLtd\\Graydon\\Providers\\SalesForceServiceProvider"
+                "InnotecScotlandLtd\\Graydon\\Providers\\GraydonServiceProvider"
             ]
         }
     },
