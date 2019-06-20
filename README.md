@@ -86,9 +86,10 @@ This function will accept 3 parameters.
 ### Graydon Monitoring Service
 This service is useful to retrieve and set monitoring on specific company. 
 #### Get
-This function will accept 2 parameters as argument.
+This function will accept 3 parameters as argument.
 1) $company_id
-2) $data 
+2) $data
+3) $store_db (optional, default false, this can be true if you want to store event in database using this service) 
 #### Set
 This function will accept 2 parameters as argument.
 1) $company_id

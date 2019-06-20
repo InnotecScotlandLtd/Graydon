@@ -40,7 +40,7 @@ Class GraydonMonitoringService
         return $response = $this->curlService->executeCurl($curl);
     }
 
-    public function get($company_id = '', $data = [])
+    public function get($company_id = '', $data = [], $store_db = false)
     {
         $url = $this->config['MONITORING_END_POINT'];
         if ($this->config['IS_MOCK']) {
@@ -63,29 +63,31 @@ Class GraydonMonitoringService
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         $response = $this->curlService->executeCurl($curl);
         $response = json_decode($response);
-        if (!empty($response->events)) {
-            foreach ($response->events as $key => $value) {
-                if (!empty($value->events)) {
-                    foreach ($value->events as $k => $v) {
+        if($store_db) {
+            if (!empty($response->events)) {
+                foreach ($response->events as $key => $value) {
+                    if (!empty($value->events)) {
+                        foreach ($value->events as $k => $v) {
 
-                        $data = DB::table('graydon_events')->where('eventId', $v->eventId)->first();
-                        if (empty($data)) {
+                            $data = DB::table('graydon_events')->where('eventId', $v->eventId)->first();
+                            if (empty($data)) {
 
-                            DB::table('graydon_events')->insert([
-                                'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
-                                'registrationId' => $value->companyIdentification->registrationId,
-                                'eventId' => $v->eventId,
-                                'eventDate' => $v->eventDate,
-                                'eventCode' => $v->eventCode,
-                                'oldValue' => (!empty($v->change->from)) ? $v->change->from : '-',
-                                'newValue' => (!empty($v->change->to)) ? $v->change->to : '-',
-                            ]);
+                                DB::table('graydon_events')->insert([
+                                    'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
+                                    'registrationId' => $value->companyIdentification->registrationId,
+                                    'eventId' => $v->eventId,
+                                    'eventDate' => $v->eventDate,
+                                    'eventCode' => $v->eventCode,
+                                    'oldValue' => (!empty($v->change->from)) ? $v->change->from : '-',
+                                    'newValue' => (!empty($v->change->to)) ? $v->change->to : '-',
+                                ]);
+                            }
                         }
                     }
                 }
             }
         }
-        return true;
+        return $response;
 
     }
 
