@@ -30,7 +30,7 @@ Class GraydonMonitoringService
                 $url .= '&' . $key . '=' . $value;
             }
         }
-        $url = replaceVars($url, $company_id);
+        $url = $this->replaceVars($url, $company_id);
         $headers = [
             'searchType: ' . $this->config['SEARCH_TYPE'],
             'Accept: ' . $this->config['ACCEPT'],
@@ -54,7 +54,7 @@ Class GraydonMonitoringService
                 $url .= '&' . $key . '=' . $value;
             }
         }
-        $url = replaceVars($url, $company_id);
+        $url = $this->replaceVars($url, $company_id);
         $headers = [
             'searchType: ' . $this->config['SEARCH_TYPE'],
             'Accept: ' . $this->config['ACCEPT'],
@@ -63,7 +63,7 @@ Class GraydonMonitoringService
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         $response = $this->curlService->executeCurl($curl);
         $response = json_decode($response);
-        if($store_db) {
+        if ($store_db) {
             if (!empty($response->events)) {
                 foreach ($response->events as $key => $value) {
                     if (!empty($value->events)) {
@@ -89,6 +89,27 @@ Class GraydonMonitoringService
         }
         return $response;
 
+    }
+
+    function replaceVars($string, $company_id = '', $other_uri = '')
+    {
+        return str_ireplace(
+            array(
+                '{account_id}',
+                '{country_id}',
+                '{company_id}',
+                '{other_uri}',
+                '{profile_id}',
+            ),
+            array(
+                config('constants.GRAYDON.ACCOUNT_ID'),
+                config('constants.GRAYDON.COUNTRY_CODE'),
+                $company_id,
+                $other_uri,
+                config('constants.GRAYDON.MONITORING_PROFILE_ID'),
+            ),
+            $string
+        );
     }
 
 }

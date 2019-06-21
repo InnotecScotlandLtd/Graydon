@@ -109,7 +109,7 @@ Class GraydonCompanyService
             }
         }
 
-        $url = replaceVars($url, $company_id, $other_uri);
+        $url = $this->replaceVars($url, $company_id, $other_uri);
 
         $headers = [
             'searchType: ' . $this->config['SEARCH_TYPE'],
@@ -118,6 +118,27 @@ Class GraydonCompanyService
         ];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         return $response = $this->curlService->executeCurl($curl);
+    }
+
+    function replaceVars($string, $company_id = '', $other_uri = '')
+    {
+        return str_ireplace(
+            array(
+                '{account_id}',
+                '{country_id}',
+                '{company_id}',
+                '{other_uri}',
+                '{profile_id}',
+            ),
+            array(
+                config('constants.GRAYDON.ACCOUNT_ID'),
+                config('constants.GRAYDON.COUNTRY_CODE'),
+                $company_id,
+                $other_uri,
+                config('constants.GRAYDON.MONITORING_PROFILE_ID'),
+            ),
+            $string
+        );
     }
 
 }
