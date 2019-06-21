@@ -105,7 +105,7 @@ Class GraydonCompanyService
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
-                $url .= '&' . $key . '=' . $value;
+                $url .= '&' . $key . '=' . urlencode($value);
             }
         }
 

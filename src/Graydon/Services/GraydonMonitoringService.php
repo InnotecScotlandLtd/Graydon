@@ -51,7 +51,7 @@ Class GraydonMonitoringService
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
-                $url .= '&' . $key . '=' . $value;
+                $url .= '&' . $key . '=' . urlencode($value);
             }
         }
         $url = $this->replaceVars($url, $company_id);
