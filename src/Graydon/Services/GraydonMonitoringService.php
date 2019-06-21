@@ -102,11 +102,11 @@ Class GraydonMonitoringService
                 '{profile_id}',
             ),
             array(
-                config('constants.GRAYDON.ACCOUNT_ID'),
-                config('constants.GRAYDON.COUNTRY_CODE'),
+                config('graydon.ACCOUNT_ID'),
+                config('graydon.COUNTRY_CODE'),
                 $company_id,
                 $other_uri,
-                config('constants.GRAYDON.MONITORING_PROFILE_ID'),
+                config('graydon.MONITORING_PROFILE_ID'),
             ),
             $string
         );
