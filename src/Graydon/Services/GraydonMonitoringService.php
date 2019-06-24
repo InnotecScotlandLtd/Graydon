@@ -72,7 +72,7 @@ Class GraydonMonitoringService
                             $data = DB::table('graydon_events')->where('eventId', $v->eventId)->first();
                             if (empty($data)) {
 
-                                DB::table('graydon_events')->insert([
+                                DB::table('graydon_company_monitoring_events')->insert([
                                     'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
                                     'registrationId' => $value->companyIdentification->registrationId,
                                     'eventId' => $v->eventId,

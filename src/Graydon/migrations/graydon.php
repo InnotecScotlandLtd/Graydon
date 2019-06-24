@@ -13,39 +13,17 @@ class CreateGraydonMigrationsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('graydon_events');
-        Schema::create('graydon_company_events', function (Blueprint $table) {
+        // table for monitoring events related to companies
+        Schema::create('graydon_company_monitoring_events', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('graydonEnterpriseId')->nullable();
-            $table->bigInteger('registrationId')->nullable();
-            $table->bigInteger('eventId')->nullable();
-            $table->date('eventDate')->nullable();
-            $table->string('eventCode')->nullable();
-            $table->string('oldValue')->nullable();
-            $table->string('newValue')->nullable();
+            $table->bigInteger('graydonEnterpriseId');
+            $table->bigInteger('registrationId');
+            $table->bigInteger('eventId');
+            $table->date('eventDate');
+            $table->string('eventCode');
+            $table->string('oldValue');
+            $table->string('newValue');
             $table->timestamps();
-            $table->softDeletes();
-        });
-        Schema::create('graydon_company_credit_reports', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('graydonEnterpriseId')->nullable();
-            $table->bigInteger('registrationId')->nullable();
-            $table->longText('events')->nullable();
-            $table->longText('companyProfile')->nullable();
-            $table->longText('branches')->nullable();
-            $table->longText('creditScores')->nullable();
-            $table->longText('opportunityScores')->nullable();
-            $table->longText('financialSummary')->nullable();
-            $table->longText('managers')->nullable();
-            $table->longText('shareholders')->nullable();
-            $table->longText('participation')->nullable();
-            $table->longText('groupStructure')->nullable();
-            $table->longText('declarationOfLiability')->nullable();
-            $table->longText('other')->nullable();
-            $table->longText('xseptions')->nullable();
-            $table->longText('events')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -56,8 +34,6 @@ class CreateGraydonMigrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('graydon_events');
-        Schema::dropIfExists('graydon_company_events');
-        Schema::dropIfExists('graydon_company_credit_reports');
+        Schema::dropIfExists('graydon_company_monitoring_events');
     }
 }
