@@ -23,7 +23,7 @@ Class GraydonMonitoringService
             $url = $this->config['MOCK_MONITORING_SET_END_POINT'];
         }
 
-        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'] . '&idType=OFFICIAL';
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
@@ -47,7 +47,7 @@ Class GraydonMonitoringService
             $url = $this->config['MOCK_MONITORING_END_POINT'];
         }
 
-        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'] . '&idType=OFFICIAL';
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {

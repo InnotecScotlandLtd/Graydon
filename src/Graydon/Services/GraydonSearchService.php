@@ -21,7 +21,7 @@ Class GraydonSearchService
             $url = $this->config['MOCK_SEARCH_END_POINT'];
         }
 
-        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'] . '&idType=OFFICIAL';
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
@@ -32,9 +32,7 @@ Class GraydonSearchService
         $url = $this->replaceVars($url);
 
         $headers = [
-            'searchType: ' . $this->config['SEARCH_TYPE'],
             'Accept: ' . $this->config['ACCEPT'],
-            'mockRequest: ' . ($this->config['IS_MOCK']) ? 'true' : 'false',
         ];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         return $response = $this->curlService->executeCurl($curl);
