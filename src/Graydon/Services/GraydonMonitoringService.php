@@ -23,7 +23,7 @@ Class GraydonMonitoringService
             $url = $this->config['MOCK_MONITORING_SET_END_POINT'];
         }
 
-        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'] . '&idType=OFFICIAL';
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
@@ -31,11 +31,7 @@ Class GraydonMonitoringService
             }
         }
         $url = $this->replaceVars($url, $company_id);
-        $headers = [
-            'searchType: ' . $this->config['SEARCH_TYPE'],
-            'Accept: ' . $this->config['ACCEPT'],
-            'mockRequest: ' . ($this->config['IS_MOCK']) ? 'true' : 'false',
-        ];
+        $headers = [];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         return $response = $this->curlService->executeCurl($curl);
     }
@@ -47,7 +43,7 @@ Class GraydonMonitoringService
             $url = $this->config['MOCK_MONITORING_END_POINT'];
         }
 
-        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'] . '&idType=OFFICIAL';
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
 
         if (!empty($data)) {
             foreach ($data as $key => $value) {
@@ -55,11 +51,7 @@ Class GraydonMonitoringService
             }
         }
         $url = $this->replaceVars($url, $company_id);
-        $headers = [
-            'searchType: ' . $this->config['SEARCH_TYPE'],
-            'Accept: ' . $this->config['ACCEPT'],
-            'mockRequest: ' . ($this->config['IS_MOCK']) ? 'true' : 'false',
-        ];
+        $headers = [];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
         $response = $this->curlService->executeCurl($curl);
         $response = json_decode($response);
