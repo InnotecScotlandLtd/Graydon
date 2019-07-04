@@ -16,6 +16,26 @@ Class GraydonMonitoringService
         $this->curlService = new CurlService();
     }
 
+    public function delete($company_id = '', $data = [])
+    {
+        $url = $this->config['MONITORING_SET_END_POINT'];
+        if ($this->config['IS_MOCK']) {
+            $url = $this->config['MOCK_MONITORING_SET_END_POINT'];
+        }
+
+        $url = $url . '?client_id=' . $this->config['CLIENT_ID'] . '&client_secret=' . $this->config['CLIENT_SECRET'];
+
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $url .= '&' . $key . '=' . $value;
+            }
+        }
+        $url = $this->replaceVars($url, $company_id);
+        $headers = [];
+        $curl = $this->curlService->initiateCurl($url, $data, $headers,'DELETE');
+        return $response = $this->curlService->executeCurl($curl);
+    }
+
     public function set($company_id = '', $data = [])
     {
         $url = $this->config['MONITORING_SET_END_POINT'];
