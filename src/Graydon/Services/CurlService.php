@@ -22,7 +22,7 @@ class CurlService
             CURLOPT_ENCODING => '',
             CURLOPT_TIMEOUT => 30000,
             CURLOPT_POSTFIELDS => $data,
-            CURLOPT_CUSTOMREQUEST => (!empty($type) && $type == 'POST') ? 'POST' : 'GET',
+            CURLOPT_CUSTOMREQUEST => (!empty($type) && $type == 'POST') ? 'POST' : (!empty($type) ? $type : 'GET'),
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_HTTPHEADER => $headers,
         ]);
