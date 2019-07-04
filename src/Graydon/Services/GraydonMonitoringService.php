@@ -32,7 +32,7 @@ Class GraydonMonitoringService
         }
         $url = $this->replaceVars($url, $company_id);
         $headers = [];
-        $curl = $this->curlService->initiateCurl($url, $data, $headers);
+        $curl = $this->curlService->initiateCurl($url, $data, $headers,'PUT');
         return $response = $this->curlService->executeCurl($curl);
     }
 
