@@ -76,8 +76,8 @@ Class GraydonMonitoringService
         $response = $this->curlService->executeCurl($curl);
         $response = json_decode($response);
         if ($store_db) {
-            if (!empty($response->events)) {
-                foreach ($response->events as $key => $value) {
+            if (!empty($response->monitoringEvents)) {
+                foreach ($response->monitoringEvents as $key => $value) {
                     if (!empty($value->events)) {
                         foreach ($value->events as $k => $v) {
 
@@ -105,11 +105,12 @@ Class GraydonMonitoringService
 
     function replaceVars($string, $company_id = '', $other_uri = '')
     {
+        $company_id = !empty($company_id) ? '/'.$company_id : '';
         return str_ireplace(
             array(
                 '{account_id}',
                 '{country_id}',
-                '{company_id}',
+                '/{company_id}',
                 '{other_uri}',
                 '{profile_id}',
             ),
