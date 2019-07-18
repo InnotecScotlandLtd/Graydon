@@ -92,6 +92,11 @@ Class GraydonCompanyService
                 $other_uri = 'events';
                 break;
 
+            case "paymentBehaviour":
+            case "payment-behaviour":
+                $other_uri = 'paymentBehaviour';
+                break;
+
             default:
                 $other_uri = 'companyProfile';
                 break;
