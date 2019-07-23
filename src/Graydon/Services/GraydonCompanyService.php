@@ -14,6 +14,11 @@ Class GraydonCompanyService
         $this->curlService = new CurlService();
     }
 
+    /**
+     * @param string $company_id
+     * @param string $other_uri
+     * @param array $data
+     */
     public function get($company_id = '', $other_uri = '', $data = [])
     {
         switch ($other_uri) {
@@ -122,7 +127,8 @@ Class GraydonCompanyService
             'mockRequest: ' . ($this->config['IS_MOCK']) ? 'true' : 'false',
         ];
         $curl = $this->curlService->initiateCurl($url, $data, $headers);
-        return $response = $this->curlService->executeCurl($curl);
+
+        return $this->curlService->executeCurl($curl);
     }
 
     function replaceVars($string, $company_id = '', $other_uri = '')

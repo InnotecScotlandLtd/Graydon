@@ -29,25 +29,11 @@ class CurlService
         return $curl;
     }
 
-    /**
-     * Executes a CURL request.
-     *
-     * @param resource $curl
-     *
-     * @return void
-     */
     public function executeCurl($curl)
     {
         return curl_exec($curl);
     }
 
-    /**
-     * Closes a CURL request.
-     *
-     * @param resource $curl
-     *
-     * @return void
-     */
     public function closeCurl($curl)
     {
         return curl_close($curl);
