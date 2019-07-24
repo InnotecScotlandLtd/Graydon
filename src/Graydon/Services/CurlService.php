@@ -17,6 +17,7 @@ class CurlService
         curl_setopt_array($curl, [
             CURLOPT_HEADER => 0,
             CURLOPT_URL => $url,
+            CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_POST => (!empty($type) && $type == 'POST') ? true : false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
