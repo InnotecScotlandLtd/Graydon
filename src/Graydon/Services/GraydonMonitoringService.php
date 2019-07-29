@@ -78,10 +78,10 @@ Class GraydonMonitoringService
         if ($store_db) {
             if (!empty($response->monitoringEvents)) {
                 foreach ($response->monitoringEvents as $key => $value) {
-                    if (!empty($value->events)) {
-                        foreach ($value->events as $k => $v) {
+                    if (!empty($value->monitoringEvents)) {
+                        foreach ($value->monitoringEvents as $k => $v) {
 
-                            $data = DB::table('graydon_events')->where('eventId', $v->eventId)->first();
+                            $data = DB::table('graydon_company_monitoring_events')->where('eventId', $v->eventId)->first();
                             if (empty($data)) {
 
                                 DB::table('graydon_company_monitoring_events')->insert([
