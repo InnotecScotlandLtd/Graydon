@@ -85,8 +85,8 @@ Class GraydonMonitoringService
                             if (empty($data)) {
 
                                 DB::table('graydon_company_monitoring_events')->insert([
-                                    'graydonEnterpriseId' => $value->companyIdentification->graydonEnterpriseId,
-                                    'registrationId' => $value->companyIdentification->registrationId,
+                                    'graydonEnterpriseId' => !empty($value->companyIdentification->graydonEnterpriseId) ? $value->companyIdentification->graydonEnterpriseId : '',
+                                    'registrationId' => !empty($value->companyIdentification->registrationId) ? $value->companyIdentification->registrationId : '',
                                     'eventId' => $v->eventId,
                                     'eventDate' => $v->eventDate,
                                     'eventCode' => $v->eventCode,
