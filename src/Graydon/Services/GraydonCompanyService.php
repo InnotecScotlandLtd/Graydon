@@ -102,6 +102,12 @@ Class GraydonCompanyService
                 $other_uri = 'paymentBehaviour';
                 break;
 
+            case "annualAccounts":
+            case "annual-accounts":
+            case "annual-account":
+                $other_uri = 'annualAccounts';
+                break;
+
             default:
                 $other_uri = 'companyProfile';
                 break;
