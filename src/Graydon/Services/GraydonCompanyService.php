@@ -105,7 +105,7 @@ Class GraydonCompanyService
             case "annualAccounts":
             case "annual-accounts":
             case "annual-account":
-                $other_uri = 'annualAccounts';
+                $other_uri = 'financials/annualAccounts';
                 break;
 
             default:
